@@ -1,0 +1,27 @@
+{
+  "name": "homework-06-sujan-lama",
+  "version": "1.0.0",
+  "description": "Create an Express application that implements a Restful Stateless API for an entity called `students`: ```javascript let students = [{id: 1, name: \"Asaad Saad\", course: \"CS572\", grade: 95}] ``` * Take into consideration that `students` entity should be treated as an immutable data structure. * Have in mind to have a separation between the Routing layer and the Controllers layer.  * Write routes for the following CRUD operations and use the proper HTTP verbs (`GET` one and all,`POST`, `PUT`, and `DELETE`). * Test with `HTTP Client` extension for VSCode. (or any other client) * Your API accepts and returns `JSON` data from/to req/res body. * Log all requests to a file `access.log` using `morgan` middleware.  * For your `POST` and `PUT` routes, create and apply a custom middleware to verify if a the `JSON` object contains `name`, `course` and `grade`, otherwise send back an error. * Accept all cross-domain XHR requests using `cors` middleware.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maharishi-university/homework-06-sujan-lama.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maharishi-university/homework-06-sujan-lama/issues"
+  },
+  "homepage": "https://github.com/maharishi-university/homework-06-sujan-lama#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4"
+  }
+}

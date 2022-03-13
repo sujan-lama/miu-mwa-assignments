@@ -1,0 +1,96 @@
+### DELETE
+DELETE http://localhost:3000/clear
+
+### Fill data
+POST http://localhost:3000/fill
+Content-Type: application/json
+
+[{
+		"_id": 1,
+		"name": "Hy-Vee Grocery Store",
+		"category": "shopping",
+		"location": [-91.97838367370545,41.00511192886627]
+	},
+	{
+		"_id": 2,
+		"name": "McDonald's",
+		"category": "restaurant",
+		"location": [-91.9828948873288,41.007128951123995]
+	},
+	{
+		"_id": 3,
+		"name": "Riverside Family Restaurant 3",
+		"category": "restaurant",
+		"location": [-91.97131697507415,41.00704040022754]
+	},
+	{
+		"_id": 4,
+		"name": "Everybody's Whole Foods",
+		"category": "shopping",
+		"location": [-91.96475894853378,41.01260048958283]
+	},
+	{
+		"_id": 5,
+		"name": "MIU library",
+		"category": "miu",
+		"location": [ -91.96871737140623,41.01849561914385]
+	},
+	{
+		"_id": 6,
+		"name": "MIU Argiro",
+		"category": "miu",
+		"location": [-91.96743496120952,41.017837782649515]
+	},
+	{
+		"_id": 7,
+		"name": "MIU Recreation Center",
+		"category": "miu",
+		"location": [-91.96346915648162,41.017405008328204]
+	},
+	{
+		"_id": 8,
+		"name": "MIU Verill Hall",
+		"category": "miu",
+		"location": [-91.96960831380403,41.016807633518695]
+	},
+	{
+		"_id": 9,
+		"name": "Logli's Store",
+		"category": "shopping",
+		"location": [-91.96819584380428,41.01299634729567]
+	},{
+		"_id": 10,
+		"name": "Shokai Sushi",
+		"category": "restaurant",
+		"location": [-91.96491588905523,41.00758866028628]
+	},{
+		"_id": 11,
+		"name": "Cafe Paradiso",
+		"category": "restaurant",
+		"location": [ -91.9636953715895,41.00816033171261]
+	},{
+		"_id": 12,
+		"name": "Pizza Hut",
+		"category": "restaurant",
+		"location": [ -91.98929501585731,41.007115477918276]
+	},{
+		"_id": 13,
+		"name": "Walmart Supercenter",
+		"category": "shopping",
+		"location": [-91.99342527781165,41.00821857419854]
+	}
+]
+
+
+### Search shopping
+GET http://localhost:3000/search?category=shopping
+
+
+### Search restaurant
+GET http://localhost:3000/search?category=restaurant
+
+### Search miu
+GET http://localhost:3000/search?category=miu
+
+
+

@@ -1,0 +1,5 @@
+### get all course
+GET http://localhost:3000/api/courses
+
+### delete course
+GET http://localhost:3000/api/courses/1
