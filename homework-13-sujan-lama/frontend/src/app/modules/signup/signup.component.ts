@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { map, mergeMap, Observable, of } from 'rxjs';
-import { SignupService } from './signup.service';
-import Response from '../models/response';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import {map, mergeMap, Observable, of} from 'rxjs';
+import Response from '../../models/response';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,9 +22,8 @@ export class SignupComponent implements OnInit {
   constructor(
     formBuilder: FormBuilder,
     private router: Router,
-    private signupService: SignupService,
+    private authenticationService: AuthenticationService,
     private toastr: ToastrService
-
   ) {
     this.signupForm = formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -46,7 +45,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    this.signupService
+    this.authenticationService
       .signup(this.signupForm.value)
       .pipe(map((v) => v as Response))
       .subscribe((v) => {
@@ -58,15 +57,18 @@ export class SignupComponent implements OnInit {
         }
 
         this.toastr.error(v.message);
+      }, error => {
+        this.toastr.error(error.error.message);
       });
   }
 
   emailUniqueValidator(control: FormControl): Promise<any> | Observable<any> {
-    return this.signupService.isEmailUnique(control.value).pipe(
+    return this.authenticationService.isEmailUnique(control.value).pipe(
       map((v) => v as Response),
-      mergeMap((v) => (v.success ? of(null) : of({ unique: true })))
+      mergeMap((v) => (v.success ? of(null) : of({unique: true})))
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

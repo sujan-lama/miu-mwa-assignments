@@ -4,9 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { AuthorizationInterceptor } from './authorization.interceptor';
-import { HomeComponent } from './home.component';
-import { IsLoggedInGuard } from './is-logged-in.guard';
+import { AuthorizationInterceptor } from './interceptors/authorization.interceptor';
+import { HomeComponent } from './modules/home/home.component';
+import { IsLoggedInGuard } from './guards/is-logged-in.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -23,19 +23,19 @@ import { ToastrModule } from 'ngx-toastr';
       {
         path: 'login',
         loadChildren: () =>
-          import('./login/login.module').then((module) => module.LoginModule),
+          import('./modules/login/login.module').then((module) => module.LoginModule),
       },
       {
         path: 'signup',
         loadChildren: () =>
-          import('./signup/signup.module').then(
+          import('./modules/signup/signup.module').then(
             (module) => module.SignupModule
           ),
       },
       {
         path: 'protected',
         loadChildren: () =>
-          import('./protected/protected.module').then(
+          import('./modules/protected/protected.module').then(
             (module) => module.ProtectedModule
           ),
         canActivate: [IsLoggedInGuard],

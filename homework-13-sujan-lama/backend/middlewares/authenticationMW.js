@@ -3,7 +3,7 @@ module.exports = async (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {
-        return next(new Error("Error: 401 Not Authorized"));
+        return res.status(403).json({success: false, message: "Error: 401 Not Authorized"})
     }
     const token = authHeader.split(' ')[1];
     try {
@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
         req.user = user;
         next();
     } catch (error) {
-        return next(new Error("Error : 403 Forbidden"));
+        return res.status(403).json({success: false, message: "Error: 401 Not Authorized"})
     }
 
 }

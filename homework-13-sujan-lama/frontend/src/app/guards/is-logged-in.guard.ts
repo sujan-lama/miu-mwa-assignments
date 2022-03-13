@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -6,9 +6,9 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { AuthorizationService } from './authorization.service';
+import {ToastrService} from 'ngx-toastr';
+import {Observable} from 'rxjs';
+import {TokenStorageService} from '../services/token-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +16,11 @@ import { AuthorizationService } from './authorization.service';
 export class IsLoggedInGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authorizationService: AuthorizationService,
+    private tokenStorage: TokenStorageService,
     private toastr: ToastrService
-  ) {}
+  ) {
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -27,8 +29,9 @@ export class IsLoggedInGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.authorizationService.isLoggedIn()) {
+    if (this.tokenStorage.getUser() === null) {
       this.toastr.error('Not authorized');
+      this.tokenStorage.clear();
       this.router.navigate(['/login']);
       return false;
     }

@@ -10,18 +10,18 @@ async function login(req, res) {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.json(responseData("Email and password field is required"));
+            return res.status(401).json(responseData("Email and password field is required"));
         }
 
         const user = await Users.findOne({ email: email });
         if (!user) {
-            return res.json(responseData("Email does not exists."));
+            return res.status(401).json(responseData("Email does not exists."));
         }
 
         const result = await bcrypt.compare(password, user.password);
 
         if (!result) {
-            return res.json(responseData("Password is incorrect"));
+            return res.status(401).json(responseData("Password is incorrect"));
         }
 
         //login successful
@@ -43,7 +43,7 @@ async function signup(req, res) {
 
         const isEmailUnique = await checkEmailAddressUnique(email);
         if (!isEmailUnique) {
-            return res.json(responseData("Email already exists"));
+            return res.status(401).json(responseData("Email already exists"));
         }
 
         // generate new id
